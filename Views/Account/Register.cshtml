@@ -1,0 +1,62 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "حساب جديد";
+}
+
+<div class="py-5 bg-light" style="min-height: 80vh;">
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="rounded-circle bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                            <i class="fas fa-user-plus fs-2"></i>
+                        </div>
+                        <h3 class="fw-bold text-dark">انضم إلى كِتَاب</h3>
+                        <p class="text-muted small">أنشئ حسابك المجاني واستمتع بقراءة آلاف الفصول الرائعة.</p>
+                    </div>
+
+                    <form asp-controller="Account" asp-action="Register" method="post">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="All" class="text-danger small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label fw-semibold small"></label>
+                            <input asp-for="FullName" class="form-control rounded-3" placeholder="أحمد محمد" />
+                            <span asp-validation-for="FullName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-semibold small"></label>
+                            <input asp-for="Email" class="form-control rounded-3" placeholder="name@example.com" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label fw-semibold small"></label>
+                            <input asp-for="Password" class="form-control rounded-3" placeholder="••••••••" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ConfirmPassword" class="form-label fw-semibold small"></label>
+                            <input asp-for="ConfirmPassword" class="form-control rounded-3" placeholder="••••••••" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 mb-4">
+                            <button type="submit" class="btn btn-success btn-lg rounded-pill fw-bold shadow-sm">
+                                إنشاء الحساب الآن <i class="fas fa-check-circle ms-1"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <span class="text-muted small">لديك حساب بالفعل؟</span>
+                        <a asp-action="Login" class="fw-bold text-primary text-decoration-none ms-1">تسجيل الدخول</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

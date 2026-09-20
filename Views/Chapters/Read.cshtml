@@ -1,0 +1,172 @@
+@model ReadChapterViewModel
+@{
+    ViewData["Title"] = $"{Model.Chapter.Novel.Title} - {Model.Chapter.Title}";
+}
+
+@if (Model.IsPurchased)
+{
+    <!-- Protected Reader Interface -->
+    <div id="readerContainer" class="reader-mode-light py-4 transition-all" style="min-height: 85vh;">
+        <div class="container" style="max-width: 860px;">
+            
+            <!-- Sticky Control Toolbar -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4 p-3 sticky-top" style="top: 75px; z-index: 100; backdrop-filter: blur(10px); background: rgba(255,255,255,0.95);" id="toolbarCard">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <a asp-controller="Novels" asp-action="Details" asp-route-id="@Model.Chapter.NovelId" class="btn btn-outline-secondary btn-sm rounded-circle" title="فهرس الرواية">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <div>
+                            <h6 class="fw-bold mb-0 text-dark text-truncate" style="max-width: 250px;">@Model.Chapter.Novel.Title</h6>
+                            <small class="text-muted">@Model.Chapter.Title</small>
+                        </div>
+                    </div>
+
+                    <!-- Reader Controls (Font Size & Theme) -->
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-outline-secondary" onclick="setFontSize('1.1rem')" title="خط صغير">أ</button>
+                            <button type="button" class="btn btn-outline-secondary active" onclick="setFontSize('1.3rem')" title="خط متوسط">أ</button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="setFontSize('1.6rem')" title="خط كبير">أ+</button>
+                        </div>
+
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-outline-dark" onclick="setTheme('light')" title="مظهر فاتح"><i class="fas fa-sun"></i></button>
+                            <button type="button" class="btn btn-outline-warning" onclick="setTheme('sepia')" title="مظهر دافئ"><i class="fas fa-book-open"></i></button>
+                            <button type="button" class="btn btn-outline-primary" onclick="setTheme('dark')" title="مظهر داكن"><i class="fas fa-moon"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Header -->
+            <div class="text-center my-5">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-2">الفصل @Model.Chapter.ChapterNumber</span>
+                <h2 class="fw-bold text-dark mb-3">@Model.Chapter.Title</h2>
+                <div class="text-muted small"><i class="fas fa-pen-nib ms-1"></i>بقلم: @Model.Chapter.Novel.Author</div>
+                <hr class="my-4 w-25 mx-auto opacity-25">
+            </div>
+
+            <!-- Protected Story Content -->
+            <div id="storyContent" class="story-text leading-loose p-4 rounded-4 shadow-sm bg-white border border-light" style="font-size: 1.3rem; line-height: 2.2;">
+                @Html.Raw(Model.Chapter.Content)
+            </div>
+
+            <!-- Chapter Navigation Footer -->
+            <div class="d-flex align-items-center justify-content-between my-5 pt-4 border-top">
+                @if (Model.PreviousChapterId.HasValue)
+                {
+                    <a asp-action="Read" asp-route-id="@Model.PreviousChapterId" class="btn btn-outline-primary rounded-pill px-4 fw-bold">
+                        <i class="fas fa-arrow-right ms-2"></i>الفصل السابق
+                    </a>
+                }
+                else
+                {
+                    <button class="btn btn-outline-secondary rounded-pill px-4" disabled>بداية الرواية</button>
+                }
+
+                <a asp-controller="Novels" asp-action="Details" asp-route-id="@Model.Chapter.NovelId" class="btn btn-light rounded-pill px-4 fw-bold">
+                    <i class="fas fa-list ms-1"></i> الفهرس
+                </a>
+
+                @if (Model.NextChapterId.HasValue)
+                {
+                    <a asp-action="Read" asp-route-id="@Model.NextChapterId" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
+                        الفصل التالي <i class="fas fa-arrow-left me-2"></i>
+                    </a>
+                }
+                else
+                {
+                    <button class="btn btn-outline-secondary rounded-pill px-4" disabled>نهاية الفصول المتاحة</button>
+                }
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script>
+            function setFontSize(size) {
+                document.getElementById('storyContent').style.fontSize = size;
+            }
+
+            function setTheme(theme) {
+                const container = document.getElementById('readerContainer');
+                const content = document.getElementById('storyContent');
+                const toolbar = document.getElementById('toolbarCard');
+
+                if (theme === 'dark') {
+                    container.style.backgroundColor = '#0f172a';
+                    container.style.color = '#e2e8f0';
+                    content.style.backgroundColor = '#1e293b';
+                    content.style.color = '#f1f5f9';
+                    content.style.borderColor = '#334155';
+                    toolbar.style.backgroundColor = 'rgba(30, 41, 59, 0.95)';
+                    toolbar.classList.add('text-white');
+                } else if (theme === 'sepia') {
+                    container.style.backgroundColor = '#fbf0d9';
+                    container.style.color = '#5f4b32';
+                    content.style.backgroundColor = '#f4e4bc';
+                    content.style.color = '#433422';
+                    content.style.borderColor = '#e4d3a8';
+                    toolbar.style.backgroundColor = 'rgba(244, 228, 188, 0.95)';
+                } else {
+                    container.style.backgroundColor = '#f8fafc';
+                    container.style.color = '#1e293b';
+                    content.style.backgroundColor = '#ffffff';
+                    content.style.color = '#1e293b';
+                    content.style.borderColor = '#f1f5f9';
+                    toolbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                }
+            }
+        </script>
+    }
+}
+else
+{
+    <!-- Locked Content Screen -->
+    <div class="container py-5 my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 text-center">
+                <div class="card border-0 shadow-lg rounded-4 p-5">
+                    <div class="mb-4">
+                        <span class="rounded-circle bg-warning bg-opacity-10 text-warning d-inline-flex align-items-center justify-content-center" style="width: 90px; height: 90px;">
+                            <i class="fas fa-lock fs-1"></i>
+                        </span>
+                    </div>
+                    <span class="badge bg-secondary bg-opacity-10 text-secondary px-3 py-2 rounded-pill fw-bold w-auto align-self-center mb-2">
+                        @Model.Chapter.Novel.Title - الفصل @Model.Chapter.ChapterNumber
+                    </span>
+                    <h3 class="fw-bold text-dark mb-3">هذا الفصل مغلق لغير المشتركين</h3>
+                    <p class="text-muted leading-relaxed mb-4">
+                        للوصول للقراءة الكاملة لهذا الفصل والاستمتاع بالأحداث المشتعلة، يرجى شراء الفصل وفتحه فورًا في حسابك.
+                    </p>
+
+                    <div class="p-4 bg-light rounded-4 mb-4 border">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span class="fw-bold text-dark fs-5">سعر الفصل الحالي:</span>
+                            <span class="badge badge-paid fs-5 px-3 py-2 rounded-pill fw-bold">@Model.Chapter.Price.ToString("N2") ج.م</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <a asp-controller="Checkout" asp-action="Buy" asp-route-chapterId="@Model.Chapter.Id" class="btn btn-warning btn-lg rounded-pill fw-bold text-dark shadow-sm">
+                                <i class="fas fa-cart-shopping me-2"></i> شراء وفتح الفصل الآن
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Url.Action("Read", "Chapters", new { id = Model.Chapter.Id })" class="btn btn-primary btn-lg rounded-pill fw-bold shadow-sm">
+                                <i class="fas fa-right-to-bracket me-2"></i> تسجيل الدخول لشراء الفصل
+                            </a>
+                        }
+                        <a asp-controller="Novels" asp-action="Details" asp-route-id="@Model.Chapter.NovelId" class="btn btn-link text-muted">
+                            العودة لفهرس الرواية
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

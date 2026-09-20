@@ -1,0 +1,70 @@
+@model Novel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "إضافة رواية جديدة";
+    var categories = ViewBag.Categories as List<Category> ?? new List<Category>();
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+            <h3 class="fw-bold text-dark mb-4"><i class="fas fa-plus-circle text-primary me-2"></i>إضافة رواية جديدة</h3>
+
+            <form asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger small mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-bold">عنوان الرواية</label>
+                    <input asp-for="Title" class="form-control rounded-3" placeholder="مثال: سر المخطوطة الكونية" required />
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Author" class="form-label fw-bold">اسم الكاتب</label>
+                        <input asp-for="Author" class="form-control rounded-3" placeholder="د. أحمد خالد" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="CategoryId" class="form-label fw-bold">التصنيف</label>
+                        <select asp-for="CategoryId" class="form-select rounded-3" required>
+                            @foreach (var c in categories)
+                            {
+                                <option value="@c.Id">@c.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-bold">نبذة عن الرواية (الوصف)</label>
+                    <textarea asp-for="Description" class="form-control rounded-3" rows="4" placeholder="ملخص القصة والمحاور الأساسية..." required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CoverImageUrl" class="form-label fw-bold">رابط صورة الغلاف (URL)</label>
+                    <input asp-for="CoverImageUrl" class="form-control rounded-3" placeholder="https://images.unsplash.com/..." />
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="form-check form-switch pt-2">
+                            <input asp-for="IsPublished" class="form-check-input" type="checkbox" checked id="publishCheck">
+                            <label class="form-check-label fw-bold" for="publishCheck">نشر الرواية فورًا</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check form-switch pt-2">
+                            <input asp-for="IsFeatured" class="form-check-input" type="checkbox" id="featureCheck">
+                            <label class="form-check-label fw-bold" for="featureCheck">عرض في الروايات المميزة</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold">حفظ ونشر الرواية</button>
+                    <a asp-action="Index" class="btn btn-light rounded-pill px-4">إلغاء</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

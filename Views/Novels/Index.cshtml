@@ -1,0 +1,76 @@
+@model IEnumerable<Novel>
+@{
+    ViewData["Title"] = "مكتبة الروايات الكاملة";
+    var categories = ViewBag.Categories as List<Category> ?? new List<Category>();
+    int? selectedCat = ViewBag.SelectedCategoryId as int?;
+}
+
+<div class="py-4 bg-dark text-white mb-4" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+    <div class="container py-3">
+        <h2 class="fw-bold mb-2"><i class="fas fa-book-bookmark text-info ms-2"></i>مكتبة الروايات</h2>
+        <p class="text-slate-300 mb-0">استكشف جميع الأعمال الروائية والقصصية المتاحة عبر المنصة.</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <!-- Category & Filter Bar -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card-body p-3">
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <span class="fw-bold text-dark ms-2"><i class="fas fa-filter text-primary ms-1"></i>التصفية حسب التصنيف:</span>
+                <a asp-action="Index" class="btn btn-sm @(!selectedCat.HasValue ? "btn-primary" : "btn-outline-secondary") rounded-pill px-3">
+                    الكل
+                </a>
+                @foreach (var cat in categories)
+                {
+                    <a asp-action="Index" asp-route-categoryId="@cat.Id" class="btn btn-sm @(selectedCat == cat.Id ? "btn-primary" : "btn-outline-secondary") rounded-pill px-3">
+                        <i class="@cat.IconClass ms-1"></i>@cat.Name
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Novels Grid -->
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5 bg-white rounded-4 shadow-sm my-4">
+            <i class="fas fa-book-open text-muted fs-1 mb-3"></i>
+            <h5 class="fw-bold text-dark">لم يتم العثور على أي روايات مطابقة</h5>
+            <p class="text-muted">جرب البحث بكلمات أخرى أو اختر تصنيفاً مختلفاً.</p>
+            <a asp-action="Index" class="btn btn-primary rounded-pill px-4">إعادة ضبط التصفية</a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var novel in Model)
+            {
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="card novel-card">
+                        <div class="novel-cover-container">
+                            <img src="@novel.CoverImageUrl" class="novel-cover-img" alt="@novel.Title">
+                            <span class="novel-badge-category">@novel.Category?.Name</span>
+                        </div>
+                        <div class="card-body d-flex flex-column p-3">
+                            <div class="d-flex align-items-center justify-content-between text-muted small mb-2">
+                                <span><i class="fas fa-user-pen text-primary ms-1"></i>@novel.Author</span>
+                                <span><i class="fas fa-star text-warning ms-1"></i>@novel.Rating</span>
+                            </div>
+                            <h5 class="card-title fw-bold text-dark text-truncate mb-2" title="@novel.Title">@novel.Title</h5>
+                            <p class="card-text text-muted small flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                @novel.Description
+                            </p>
+                            <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+                                <span class="small text-muted"><i class="fas fa-list-ol ms-1"></i>@novel.Chapters.Count فصول</span>
+                                <a asp-action="Details" asp-route-id="@novel.Id" class="btn btn-primary btn-sm rounded-pill px-3 fw-bold">
+                                    تصفح الرواية
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

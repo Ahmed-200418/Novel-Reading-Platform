@@ -1,0 +1,83 @@
+@model IEnumerable<Novel>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "إدارة الروايات";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h2 class="fw-bold text-dark mb-1">إدارة الروايات</h2>
+        <p class="text-muted small">إضافة وتعديل الروايات وإدارة الفصول التابعة لها.</p>
+    </div>
+    <a asp-action="Create" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
+        <i class="fas fa-plus me-1"></i> إضافة رواية جديدة
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light text-muted small">
+                    <tr>
+                        <th class="ps-4 py-3">الغلاف والعنوان</th>
+                        <th>الكاتب والتصنيف</th>
+                        <th>الفصول</th>
+                        <th>المشاهدات</th>
+                        <th>حالة النشر</th>
+                        <th class="pe-4 text-center">الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var novel in Model)
+                    {
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="@novel.CoverImageUrl" style="width: 45px; height: 60px; object-fit: cover;" class="rounded-2 shadow-sm" alt="Cover">
+                                    <div>
+                                        <h6 class="fw-bold text-dark mb-1">@novel.Title</h6>
+                                        <small class="text-muted"><i class="fas fa-star text-warning me-1"></i>@novel.Rating</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark">@novel.Author</div>
+                                <span class="badge bg-secondary bg-opacity-10 text-dark small">@novel.Category?.Name</span>
+                            </td>
+                            <td>
+                                <a asp-area="Admin" asp-controller="AdminChapters" asp-action="Index" asp-route-novelId="@novel.Id" class="badge bg-primary bg-opacity-10 text-primary text-decoration-none px-3 py-2 rounded-pill fw-bold">
+                                    <i class="fas fa-list-ol me-1"></i>@novel.Chapters.Count فصول (إدارة)
+                                </a>
+                            </td>
+                            <td>
+                                <span class="fw-bold text-muted">@novel.ViewsCount</span>
+                            </td>
+                            <td>
+                                <form asp-action="TogglePublish" asp-route-id="@novel.Id" method="post" class="d-inline">
+                                    @if (novel.IsPublished)
+                                    {
+                                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-3 fw-bold" title="انقر لإلغاء النشر">منشورة</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-sm btn-secondary rounded-pill px-3 fw-bold" title="انقر للنشر">مسودة</button>
+                                    }
+                                </form>
+                            </td>
+                            <td class="pe-4 text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Edit" asp-route-id="@novel.Id" class="btn btn-outline-primary" title="تعديل"><i class="fas fa-pen"></i></a>
+                                    <form asp-action="Delete" asp-route-id="@novel.Id" method="post" class="d-inline" onsubmit="return confirm('هل أنت تأكد من حذف هذه الرواية وكافة فصولها؟');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-outline-danger" title="حذف"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

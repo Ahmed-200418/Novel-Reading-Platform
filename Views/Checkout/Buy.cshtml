@@ -1,0 +1,125 @@
+@model Order
+@{
+    ViewData["Title"] = "إتمام دفع الفصل - NovelsPay";
+    var chapter = ViewBag.Chapter as Chapter;
+}
+
+<div class="py-5 bg-light" style="min-height: 80vh;">
+    <div class="container py-4">
+        <div class="row justify-content-center g-4">
+            
+            <!-- Order Summary Card -->
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
+                    <div class="card-header bg-dark text-white p-4" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);">
+                        <span class="badge bg-info bg-opacity-20 text-info px-3 py-1 rounded-pill mb-2 small">تفاصيل طلب الشراء</span>
+                        <h4 class="fw-bold mb-0">ملخص الفاتورة الرقمية</h4>
+                    </div>
+                    <div class="card-body p-4 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-4 border mb-3">
+                                <img src="@chapter?.Novel.CoverImageUrl" class="rounded-3" style="width: 60px; height: 80px; object-fit: cover;" alt="Cover">
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-1">@chapter?.Novel.Title</h6>
+                                    <span class="text-primary small fw-semibold">@chapter?.Title</span>
+                                </div>
+                            </div>
+
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <span class="text-muted">رقم الفاتورة:</span>
+                                    <span class="fw-bold text-dark">@Model.OrderNumber</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <span class="text-muted">تاريخ الطلب:</span>
+                                    <span class="fw-bold text-dark">@Model.CreatedAt.ToString("yyyy/MM/dd - HH:mm")</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <span class="text-muted">حالة الدفع:</span>
+                                    <span class="badge bg-warning text-dark px-3 py-1 rounded-pill fw-bold">معلق (بانتظار السداد)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="p-3 bg-primary bg-opacity-10 rounded-4 border border-primary border-opacity-20 text-center mt-3">
+                            <small class="text-muted d-block">إجمالي المبلغ المستحق:</small>
+                            <h2 class="fw-black text-primary mb-0">@Model.Amount.ToString("N2") ج.م</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods Portal -->
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5">
+                    <h4 class="fw-bold text-dark mb-3"><i class="fas fa-credit-card text-primary me-2"></i>اختر طريقة الدفع الفوري:</h4>
+                    <p class="text-muted small mb-4">بوابة الدفع التفاعلية الآمنة (بيئة اختبار وتفعيل فورية للمشتركين).</p>
+
+                    <form asp-controller="Checkout" asp-action="ConfirmPayment" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="orderId" value="@Model.Id" />
+
+                        <!-- Payment Option Tabs/Radios -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="paymentMethod" id="methodCard" value="بطاقة ائتمانية (Visa/Mastercard)" checked>
+                                <label class="btn btn-outline-primary w-100 p-3 rounded-4 text-center h-100 d-flex flex-column align-items-center justify-content-center" for="methodCard">
+                                    <i class="fab fa-cc-visa fs-2 mb-2"></i>
+                                    <span class="fw-bold small">بطاقة بانكية</span>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="paymentMethod" id="methodWallet" value="محفظة فودافون / كاش">
+                                <label class="btn btn-outline-danger w-100 p-3 rounded-4 text-center h-100 d-flex flex-column align-items-center justify-content-center" for="methodWallet">
+                                    <i class="fas fa-mobile-screen-button fs-2 mb-2"></i>
+                                    <span class="fw-bold small">محفظة إلكترونية</span>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="paymentMethod" id="methodFawry" value="فوري Express">
+                                <label class="btn btn-outline-warning w-100 p-3 rounded-4 text-center h-100 d-flex flex-column align-items-center justify-content-center" for="methodFawry">
+                                    <i class="fas fa-barcode fs-2 mb-2"></i>
+                                    <span class="fw-bold small">فوري باي</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Card Inputs -->
+                        <div class="bg-light p-4 rounded-4 border mb-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold small">اسم صاحب البطاقة</label>
+                                <input type="text" name="cardHolderName" class="form-control rounded-3" placeholder="أحمد محمد" value="محمود حسن" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold small">رقم البطاقة (اختباري)</label>
+                                <div class="input-group">
+                                    <input type="text" name="cardNumber" class="form-control rounded-end-3" placeholder="4000 0000 0000 0000" value="4111 2222 3333 4444" required>
+                                    <span class="input-group-text bg-white rounded-start-3"><i class="far fa-credit-card text-muted"></i></span>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label fw-semibold small">تاريخ الانتهاء</label>
+                                    <input type="text" class="form-control rounded-3" placeholder="12/28" value="12/28">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fw-semibold small">رمز CVC</label>
+                                    <input type="password" class="form-control rounded-3" placeholder="123" value="123">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg rounded-pill fw-bold py-3 shadow">
+                                <i class="fas fa-lock me-2"></i> تأكيد الدفع وفتح الفصل الآن
+                            </button>
+                            <a asp-controller="Novels" asp-action="Details" asp-route-id="@chapter?.NovelId" class="btn btn-link text-muted">
+                                إلغاء والعودة للرواية
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

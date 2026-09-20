@@ -1,0 +1,71 @@
+@model List<Chapter>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var novel = ViewBag.Novel as Novel;
+    ViewData["Title"] = $"فصول رواية: {novel?.Title}";
+}
+
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <div class="text-muted small mb-1">
+            <a asp-area="Admin" asp-controller="AdminNovels" asp-action="Index" class="text-decoration-none">الروايات</a> / فصول الرواية
+        </div>
+        <h2 class="fw-bold text-dark mb-0">فصول رواية: <span class="text-primary">@novel?.Title</span></h2>
+    </div>
+    <a asp-action="Create" asp-route-novelId="@novel?.Id" class="btn btn-success rounded-pill px-4 fw-bold shadow-sm">
+        <i class="fas fa-plus me-1"></i> إضافة فصل جديد
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light text-muted small">
+                    <tr>
+                        <th class="ps-4 py-3">رقم الفصل</th>
+                        <th>عنوان الفصل</th>
+                        <th>النوع والسعر</th>
+                        <th>تاريخ الإضافة</th>
+                        <th class="pe-4 text-center">الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ch in Model)
+                    {
+                        <tr>
+                            <td class="ps-4">
+                                <span class="badge bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center fw-bold" style="width: 36px; height: 36px;">
+                                    @ch.ChapterNumber
+                                </span>
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark">@ch.Title</div>
+                            </td>
+                            <td>
+                                @if (ch.IsFree)
+                                {
+                                    <span class="badge bg-success px-3 py-2 rounded-pill">مجانًا</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">مدفوع (@ch.Price.ToString("N2") ج.م)</span>
+                                }
+                            </td>
+                            <td class="small text-muted">@ch.CreatedAt.ToString("yyyy/MM/dd")</td>
+                            <td class="pe-4 text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Edit" asp-route-id="@ch.Id" class="btn btn-outline-primary" title="تعديل"><i class="fas fa-pen"></i></a>
+                                    <form asp-action="Delete" asp-route-id="@ch.Id" method="post" class="d-inline" onsubmit="return confirm('هل أنت تأكد من حذف هذا الفصل؟');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-outline-danger" title="حذف"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
