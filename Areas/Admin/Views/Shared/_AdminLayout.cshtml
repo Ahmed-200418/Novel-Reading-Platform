@@ -63,29 +63,29 @@
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
-                        <i class="fas fa-chart-pie me-2 fs-5"></i><span>نظرة عامة وإحصائيات</span>
+                        <i class="fas fa-chart-pie ms-2 fs-5"></i><span>نظرة عامة وإحصائيات</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="AdminNovels" asp-action="Index">
-                        <i class="fas fa-book-bookmark me-2 fs-5"></i><span>إدارة الروايات</span>
+                        <i class="fas fa-book-bookmark ms-2 fs-5"></i><span>إدارة الروايات</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Transactions">
-                        <i class="fas fa-money-bill-transfer me-2 fs-5"></i><span>المعاملات والإيرادات</span>
+                        <i class="fas fa-money-bill-transfer ms-2 fs-5"></i><span>المعاملات والإيرادات</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Users">
-                        <i class="fas fa-users me-2 fs-5"></i><span>المستخدمين القُرّاء</span>
+                        <i class="fas fa-users ms-2 fs-5"></i><span>المستخدمين القُرّاء</span>
                     </a>
                 </li>
             </ul>
 
             <hr class="border-secondary opacity-25">
             <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-light rounded-pill w-100 fw-bold py-2 d-flex align-items-center justify-content-center">
-                <i class="fas fa-globe me-2"></i>العودة للموقع
+                <i class="fas fa-globe ms-2"></i>العودة للموقع
             </a>
         </aside>
 
@@ -94,7 +94,7 @@
             @if (TempData["SuccessMessage"] != null)
             {
                 <div class="alert alert-success alert-dismissible fade show rounded-4 shadow-sm border-0 mb-4" role="alert">
-                    <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+                    <i class="fas fa-check-circle ms-2"></i>@TempData["SuccessMessage"]
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             }
@@ -103,6 +103,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

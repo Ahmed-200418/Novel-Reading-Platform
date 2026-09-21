@@ -10,7 +10,7 @@
         <p class="text-muted small">متابعة المبيعات الحية، الفصول المشتراة وتفاعل القرّاء.</p>
     </div>
     <a asp-area="Admin" asp-controller="AdminNovels" asp-action="Create" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
-        <i class="fas fa-plus me-1"></i> إضافة رواية جديدة
+        <i class="fas fa-plus ms-1"></i> إضافة رواية جديدة
     </a>
 </div>
 
@@ -35,9 +35,9 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div>
                     <span class="text-muted small fw-bold">إجمالي المشتريات</span>
-                    <h3 class="fw-bold text-primary mb-0 mt-1">@Model.TotalPurchases معاملة</h3>
+                    <h3 class="fw-bold text-teal mb-0 mt-1" style="color: #0d9488;">@Model.TotalPurchases معاملة</h3>
                 </div>
-                <div class="rounded-circle bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                <div class="rounded-circle bg-teal bg-opacity-10 text-teal d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: rgba(13, 148, 136, 0.1); color: #0d9488;">
                     <i class="fas fa-cart-check fs-4"></i>
                 </div>
             </div>
@@ -78,8 +78,8 @@
     <div class="col-lg-7">
         <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
             <div class="card-header bg-white border-0 py-3 d-flex align-items-center justify-content-between">
-                <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-history text-primary me-2"></i>أحدث المشتريات والطلبات</h5>
-                <a asp-action="Transactions" class="small text-primary fw-bold text-decoration-none">عرض جميع المعاملات</a>
+                <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-history text-teal ms-2" style="color: #0d9488;"></i>أحدث المشتريات والطلبات</h5>
+                <a asp-action="Transactions" class="small text-teal fw-bold text-decoration-none" style="color: #0d9488;">عرض جميع المعاملات</a>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -115,7 +115,7 @@
     <div class="col-lg-5">
         <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
             <div class="card-header bg-white border-0 py-3">
-                <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-fire text-danger me-2"></i>أكثر الروايات قراءة</h5>
+                <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-fire text-warning ms-2"></i>أكثر الروايات قراءة</h5>
             </div>
             <div class="card-body p-0">
                 <div class="list-group list-group-flush">
@@ -123,14 +123,14 @@
                     {
                         <div class="list-group-item p-3 d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-3">
-                                <img src="@novel.CoverImageUrl" style="width: 40px; height: 55px; object-fit: cover;" class="rounded-2 shadow-sm" alt="Cover">
+                                <img src="@novel.CoverImageUrl" style="width: 40px; height: 55px; object-fit: cover;" class="rounded-2 shadow-sm" alt="@novel.Title" onerror="handleImageError(this)">
                                 <div>
                                     <h6 class="fw-bold mb-1 text-dark">@novel.Title</h6>
-                                    <small class="text-muted"><i class="fas fa-pen-nib me-1"></i>@novel.Author</small>
+                                    <small class="text-muted"><i class="fas fa-pen-nib ms-1"></i>@novel.Author</small>
                                 </div>
                             </div>
-                            <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2 fw-bold">
-                                <i class="fas fa-eye me-1"></i>@novel.ViewsCount
+                            <span class="badge bg-teal bg-opacity-10 text-teal rounded-pill px-3 py-2 fw-bold" style="background-color: rgba(13, 148, 136, 0.1); color: #0d9488;">
+                                <i class="fas fa-eye ms-1"></i>@novel.ViewsCount
                             </span>
                         </div>
                     }

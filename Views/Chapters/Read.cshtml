@@ -33,7 +33,7 @@
                         <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-outline-dark" onclick="setTheme('light')" title="مظهر فاتح"><i class="fas fa-sun"></i></button>
                             <button type="button" class="btn btn-outline-warning" onclick="setTheme('sepia')" title="مظهر دافئ"><i class="fas fa-book-open"></i></button>
-                            <button type="button" class="btn btn-outline-primary" onclick="setTheme('dark')" title="مظهر داكن"><i class="fas fa-moon"></i></button>
+                            <button type="button" class="btn btn-outline-info" onclick="setTheme('dark')" title="مظهر داكن"><i class="fas fa-moon"></i></button>
                         </div>
                     </div>
                 </div>
@@ -41,9 +41,9 @@
 
             <!-- Chapter Header -->
             <div class="text-center my-5">
-                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold mb-2">الفصل @Model.Chapter.ChapterNumber</span>
+                <span class="badge bg-teal bg-opacity-10 text-teal px-3 py-2 rounded-pill fw-bold mb-2" style="background-color: rgba(13, 148, 136, 0.1); color: #0d9488;">الفصل @Model.Chapter.ChapterNumber</span>
                 <h2 class="fw-bold text-dark mb-3">@Model.Chapter.Title</h2>
-                <div class="text-muted small"><i class="fas fa-pen-nib ms-1"></i>بقلم: @Model.Chapter.Novel.Author</div>
+                <div class="text-muted small"><i class="fas fa-pen-nib ms-1 text-teal"></i>بقلم: @Model.Chapter.Novel.Author</div>
                 <hr class="my-4 w-25 mx-auto opacity-25">
             </div>
 
@@ -130,7 +130,7 @@ else
                 <div class="card border-0 shadow-lg rounded-4 p-5">
                     <div class="mb-4">
                         <span class="rounded-circle bg-warning bg-opacity-10 text-warning d-inline-flex align-items-center justify-content-center" style="width: 90px; height: 90px;">
-                            <i class="fas fa-lock fs-1"></i>
+                            <i class="fas fa-lock fs-1 text-gold"></i>
                         </span>
                     </div>
                     <span class="badge bg-secondary bg-opacity-10 text-secondary px-3 py-2 rounded-pill fw-bold w-auto align-self-center mb-2">

@@ -5,7 +5,7 @@
     int? selectedCat = ViewBag.SelectedCategoryId as int?;
 }
 
-<div class="py-4 text-white mb-4" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+<div class="py-4 text-white mb-4" style="background: linear-gradient(135deg, #0f172a 0%, #0f2942 100%);">
     <div class="container py-3">
         <h2 class="fw-bold mb-2 d-inline-flex align-items-center gap-2"><i class="fas fa-book-bookmark text-info"></i><span>مكتبة الروايات</span></h2>
         <p class="text-slate-300 mb-0">استكشف جميع الأعمال الروائية والقصصية المتاحة عبر المنصة.</p>
@@ -17,7 +17,7 @@
     <div class="card border-0 shadow-sm rounded-4 mb-4">
         <div class="card-body p-3">
             <div class="d-flex flex-wrap align-items-center gap-2">
-                <span class="fw-bold text-dark ms-2 d-inline-flex align-items-center gap-2"><i class="fas fa-filter text-primary"></i><span>التصفية حسب التصنيف:</span></span>
+                <span class="fw-bold text-dark ms-2 d-inline-flex align-items-center gap-2"><i class="fas fa-filter text-teal"></i><span>التصفية حسب التصنيف:</span></span>
                 <a asp-action="Index" class="btn btn-sm @(!selectedCat.HasValue ? "btn-primary" : "btn-outline-secondary") rounded-pill px-3 fw-bold">
                     الكل
                 </a>
@@ -52,12 +52,12 @@
                             <img src="@novel.CoverImageUrl" 
                                  class="novel-cover-img" 
                                  alt="@novel.Title"
-                                 onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
+                                 onerror="handleImageError(this)">
                             <span class="novel-badge-category">@novel.Category?.Name</span>
                         </div>
                         <div class="card-body d-flex flex-column p-3">
                             <div class="d-flex align-items-center justify-content-between text-muted small mb-2">
-                                <span class="d-inline-flex align-items-center gap-2"><i class="fas fa-user-pen text-primary"></i><span>@novel.Author</span></span>
+                                <span class="d-inline-flex align-items-center gap-2"><i class="fas fa-user-pen text-teal"></i><span>@novel.Author</span></span>
                                 <span class="d-inline-flex align-items-center gap-1"><i class="fas fa-star text-warning"></i><span>@novel.Rating</span></span>
                             </div>
                             <h5 class="card-title fw-bold text-dark text-truncate mb-2" title="@novel.Title">@novel.Title</h5>
@@ -65,7 +65,7 @@
                                 @novel.Description
                             </p>
                             <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
-                                <span class="d-inline-flex align-items-center gap-2 small text-muted"><i class="fas fa-list-ol text-primary"></i><span>@novel.Chapters.Count فصول</span></span>
+                                <span class="d-inline-flex align-items-center gap-2 small text-muted"><i class="fas fa-list-ol text-teal"></i><span>@novel.Chapters.Count فصول</span></span>
                                 <a asp-action="Details" asp-route-id="@novel.Id" class="btn btn-primary btn-sm rounded-pill px-3 fw-bold d-inline-flex align-items-center gap-2">
                                     <span>تصفح الرواية</span>
                                 </a>

@@ -3,7 +3,7 @@
     ViewData["Title"] = Model.Novel.Title;
 }
 
-<div class="py-5 text-white" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);">
+<div class="py-5 text-white" style="background: linear-gradient(135deg, #0f172a 0%, #0f2942 100%);">
     <div class="container">
         <div class="row g-4 align-items-center">
             <div class="col-md-3 text-center">
@@ -11,7 +11,7 @@
                      class="img-fluid rounded-4 shadow-lg border border-secondary border-opacity-30" 
                      style="max-height: 360px; width: 100%; object-fit: cover;" 
                      alt="@Model.Novel.Title"
-                     onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
+                     onerror="handleImageError(this)">
             </div>
             <div class="col-md-9">
                 <span class="badge bg-info bg-opacity-20 text-info border border-info border-opacity-30 px-3 py-2 rounded-pill mb-3 d-inline-flex align-items-center gap-2">
@@ -21,7 +21,7 @@
                 <div class="d-flex flex-wrap align-items-center gap-4 text-slate-300 mb-4">
                     <span class="d-inline-flex align-items-center gap-2"><i class="fas fa-user-nib text-info"></i><span>الكاتب: <strong>@Model.Novel.Author</strong></span></span>
                     <span class="d-inline-flex align-items-center gap-2"><i class="fas fa-star text-warning"></i><span>التقييم: <strong>@Model.Novel.Rating / 5.0</strong></span></span>
-                    <span class="d-inline-flex align-items-center gap-2"><i class="fas fa-eye text-primary"></i><span>المشاهدات: <strong>@Model.Novel.ViewsCount</strong></span></span>
+                    <span class="d-inline-flex align-items-center gap-2"><i class="fas fa-eye text-teal"></i><span>المشاهدات: <strong>@Model.Novel.ViewsCount</strong></span></span>
                     <span class="d-inline-flex align-items-center gap-2"><i class="fas fa-book-open text-success"></i><span>عدد الفصول: <strong>@Model.Chapters.Count</strong></span></span>
                 </div>
                 <p class="fs-6 text-slate-300 leading-relaxed mb-4" style="max-width: 800px;">
@@ -45,7 +45,7 @@
         <div class="col-lg-9">
             <div class="card border-0 shadow-sm rounded-4 mb-4">
                 <div class="card-header bg-white border-0 py-3 d-flex align-items-center justify-content-between">
-                    <h4 class="fw-bold mb-0 text-dark d-inline-flex align-items-center gap-2"><i class="fas fa-list-ol text-primary"></i><span>فهرس الفصول</span></h4>
+                    <h4 class="fw-bold mb-0 text-dark d-inline-flex align-items-center gap-2"><i class="fas fa-list-ol text-teal"></i><span>فهرس الفصول</span></h4>
                     <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-3 py-2">
                         إجمالي الفصول: @Model.Chapters.Count
                     </span>
@@ -56,7 +56,7 @@
                         {
                             <div class="list-group-item p-3 d-flex align-items-center justify-content-between flex-wrap gap-3">
                                 <div class="d-flex align-items-center gap-3">
-                                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px; font-size: 1rem;">
+                                    <span class="badge bg-teal bg-opacity-10 text-teal rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px; font-size: 1rem; background-color: rgba(13, 148, 136, 0.1); color: #0d9488;">
                                         @ch.ChapterNumber
                                     </span>
                                     <div>
@@ -72,7 +72,7 @@
                                             <i class="fas fa-gift"></i><span>مجانًا</span>
                                         </span>
                                         <a asp-controller="Chapters" asp-action="Read" asp-route-id="@ch.Id" class="btn btn-outline-success btn-sm rounded-pill px-4 fw-bold d-inline-flex align-items-center gap-2">
-                                            <span>قراءة</span><i class="fas fa-book-open"></i>
+                                            <span>قراءة</span><i class="fas fa-book-open me-1"></i>
                                         </a>
                                     }
                                     else if (ch.IsPurchased)
@@ -81,7 +81,7 @@
                                             <i class="fas fa-circle-check"></i><span>متاح للحساب</span>
                                         </span>
                                         <a asp-controller="Chapters" asp-action="Read" asp-route-id="@ch.Id" class="btn btn-primary btn-sm rounded-pill px-4 fw-bold d-inline-flex align-items-center gap-2">
-                                            <span>متابعة القراءة</span><i class="fas fa-arrow-left"></i>
+                                            <span>متابعة القراءة</span><i class="fas fa-arrow-left me-1"></i>
                                         </a>
                                     }
                                     else
@@ -90,7 +90,7 @@
                                             <i class="fas fa-coins"></i><span>@ch.Price.ToString("N2") ج.م</span>
                                         </span>
                                         <a asp-controller="Checkout" asp-action="Buy" asp-route-chapterId="@ch.Id" class="btn btn-warning btn-sm rounded-pill px-4 fw-bold text-dark shadow-sm d-inline-flex align-items-center gap-2">
-                                            <span>شراء الفصل</span><i class="fas fa-cart-shopping"></i>
+                                            <span>شراء الفصل</span><i class="fas fa-cart-shopping me-1"></i>
                                         </a>
                                     }
                                 </div>
