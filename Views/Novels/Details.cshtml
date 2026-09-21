@@ -14,8 +14,8 @@
                      onerror="handleImageError(this)">
             </div>
             <div class="col-md-9">
-                <span class="badge bg-info bg-opacity-20 text-info border border-info border-opacity-30 px-3 py-2 rounded-pill mb-3 d-inline-flex align-items-center gap-2">
-                    <i class="@Model.Novel.Category.IconClass"></i><span>@Model.Novel.Category.Name</span>
+                <span class="badge badge-category-pill px-3 py-2 rounded-pill mb-3 d-inline-flex align-items-center gap-2">
+                    <i class="@(Model.Novel.Category?.IconClass ?? "fas fa-tags")"></i><span>@(Model.Novel.Category?.Name ?? "عام")</span>
                 </span>
                 <h1 class="display-5 fw-bold mb-2">@Model.Novel.Title</h1>
                 <div class="d-flex flex-wrap align-items-center gap-4 text-slate-300 mb-4">

@@ -408,6 +408,15 @@ body[dir="rtl"] i.me-1, body[dir="rtl"] i.me-2, body[dir="rtl"] i.me-3 {
     color: #ffffff;
 }
 
+.badge-category-pill {
+    background: rgba(13, 148, 136, 0.25) !important;
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.45) !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.2px;
+}
+
 /* Buttons System */
 .btn-primary {
     background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
