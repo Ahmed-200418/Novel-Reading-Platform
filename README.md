@@ -1,101 +1,100 @@
-# 📖 منصة كِتَاب | Novel Reading Platform
+# 📖 Novel Reading Platform (كِتَاب)
 
-> **منصة رقمية حديثة وفاخرة لقراءة ونشر الروايات الإلكترونية وشراء الفصول الحصرية بأعلى معايير الجودة والأمان البصري.**
-
----
-
-## 🌟 مميزات المنصة الرئيسية (Key Features)
-
-* 📚 **مكتبة روايات شاملة وتصنيفات أدبية**: استكشاف الروايات حسب التصنيف (خيال وعوالم موازية، غموض وجريمة، دراما ورومانسية، تاريخ وأساطير).
-* 🔒 **نظام الفصول المجانية والمدفوعة**: دعم القراءة المجانية للفصول الأولى مع قفل الفصول المتقدمة وإتاحتها بعد الشراء الفوري.
-* 📖 **واجهة قارئ تفاعلية ومرنة (Reader Mode)**:
-  * التحكم في حجم الخط (صغير، متوسط، كبير).
-  * تغيير مظهر الصفحة (فاتح، دافئ Sepia، داكن Night Mode).
-  * التنقل السلس بين الفصول السابقة والتالية مع زر العودة للفهرس.
-* 💳 **بوابة دفع رقمية محاكاة (NovelsPay)**:
-  * دعم خيارات الدفع المختلفة (بطاقة ائتمانية Visa/Mastercard، محفظة إلكترونية كـ فودافون كاش، فوري Express).
-  * تفعيل فوري ومباشر للفصل في حساب القارئ فور إتمام المعاملة.
-* 👤 **مكتبة المستخدم وسجل الفواتير (My Library & Invoices)**:
-  * استعراض جميع الفصول الممتلكة والقراءة المباشرة لها.
-  * جدول كامل بسجل الطلبات والمعاملات المالية وأرقام المعاملات الترجيعية.
-* 🛡️ **لوحة تحكم الأدمن (Admin Dashboard)**:
-  * إحصائيات المبيعات، إجمالي الإيرادات، عدد القُرّاء والروايات.
-  * إدارة الروايات (إضافة، تعديل، حذف، تغيير حالة النشر).
-  * إدارة الفصول لكل رواية وتحديد السعر والحالة (مجاني/مدفوع).
-* 🎨 **هوية بصرية احترافية (Refactored Emerald & Slate UI)**:
-  * ألوان زمردية ملكية (`#0d9488`) مع أزرق أوقيانوسي (`#0284c7`) وتدرجات ذهبية (`#f59e0b`).
-  * تباين ناصع بدون أي ألوان بنفسجية، ودعم تام للغة العربية والاتجاه من اليمين للشمال (RTL).
-  * نظام ذكي لمعالجة وتعويض أخطاء تحميل الصور (SVG Image Fallback).
+> **A modern, luxury ASP.NET Core 10 MVC web platform for digital novel publishing, online reader customization, and paid chapter access.**
 
 ---
 
-## 🛠️ التقنيات المستخدمة (Tech Stack)
+## 🌟 Key Features
+
+* 📚 **Extensive Novel Library & Categories**: Explore digital novels categorized by genres (Fantasy & Parallel Worlds, Mystery & Crime, Drama & Romance, History & Legends).
+* 🔒 **Free & Paid Chapter Protection**: Free access to intro chapters, with secure locking for premium chapters unlocked upon instant purchase.
+* 📖 **Interactive Custom Reader Interface (Reader Mode)**:
+  * Adjustable font sizing (Small, Medium, Large).
+  * Multiple display themes (Light, Warm Sepia, Night Dark).
+  * Smooth navigation between previous and next chapters with quick index access.
+* 💳 **Simulated Payment Gateway (NovelsPay)**:
+  * Multiple payment methods supported (Visa/Mastercard Credit Cards, E-Wallets like Vodafone Cash, Fawry Express).
+  * Instant chapter activation upon successful payment completion.
+* 👤 **Personal Reader Library & Order Invoices**:
+  * View all purchased chapters with direct one-click reading access.
+  * Complete transaction order history with reference IDs and invoice amounts.
+* 🛡️ **Comprehensive Admin Control Panel**:
+  * Performance analytics (Total Revenue, Transactions, Reader Count, Novel Statistics).
+  * Full Novel Management (Add, Edit, Delete, Toggle Publication Status).
+  * Chapter Management (Set Chapter Prices, Free vs Paid Status, Content Editing).
+* 🎨 **Refactored Emerald & Slate UI/UX**:
+  * Luxurious Royal Emerald (`#0d9488`), Ocean Sapphire (`#0284c7`), and Warm Gold (`#f59e0b`) color palette (Zero Purple).
+  * High-contrast typography, full Arabic RTL layout optimization, and universal SVG image fallback protection.
+
+---
+
+## 🛠️ Technology Stack
 
 * **Framework**: ASP.NET Core 10 MVC (.NET 10)
-* **Database & ORM**: Entity Framework Core & ApplicationDbContext (Seeded Data)
-* **Security & Auth**: ASP.NET Core Identity (Role-based: Admin & Reader)
-* **UI & Styling**: Bootstrap 5 RTL, FontAwesome 6, Cairo Arabic Font, Custom CSS & JS System
+* **Database & ORM**: Entity Framework Core & ApplicationDbContext (Automated DbInitializer Seeding)
+* **Security & Auth**: ASP.NET Core Identity (Role-Based Access: `Admin` & `Reader`)
+* **Frontend & UI**: Bootstrap 5 RTL, FontAwesome 6, Cairo Arabic Google Font, Custom CSS3 & JS ES6 System
 
 ---
 
-## 🚀 كيفية التشغيل والتشغيل المحلي (Getting Started)
+## 🚀 Getting Started & Local Setup
 
-### المتطلبات الأساسية
-* مثبت [.NET 10 SDK](https://dotnet.microsoft.com/download) أو أحدث.
+### Prerequisites
+* [.NET 10 SDK](https://dotnet.microsoft.com/download) installed on your machine.
 
-### خطوات التشغيل
-1. افتح موجه الأوامر (Terminal/PowerShell) في مجلد المشروع:
+### Installation & Run Steps
+1. Open terminal/PowerShell in the project root directory:
    ```bash
    cd "Novel Reading Platform"
    ```
 
-2. قم باسترجاع الحزم وبناء المشروع:
+2. Restore packages and build the solution:
    ```bash
    dotnet restore
    dotnet build
    ```
 
-3. شغل التطبيق:
+3. Launch the application:
    ```bash
    dotnet run
    ```
 
-4. افتح المتصفح وانتقل إلى الرابط المعروض (عادةً `https://localhost:7147` أو `http://localhost:5147`).
+4. Open your browser and navigate to the local server URL (typically `https://localhost:7147` or `http://localhost:5147`).
 
 ---
 
-## 🔑 حسابات الدخول للتجربة السريعة (Demo Credentials)
+## 🔑 Demo Accounts Credentials
 
-يتم تهيئة البيانات الافتراضية تلقائيًا عند تشغيل التطبيق لأول مرة:
+Seed data automatically initializes pre-configured accounts on first launch:
 
-| نوع الحساب | البريد الإلكتروني (Email) | كلمة المرور (Password) |
+| Role | Email | Password |
 |---|---|---|
-| **مسؤول النظام (Admin)** | `admin@novelhub.com` | `Admin@123456` |
-| **القارئ الذهبي (Reader)** | `reader@novelhub.com` | `User@123456` |
-| **قارئ تجريبي (Sara)** | `sara@novelhub.com` | `User@123456` |
-| **قارئ تجريبي (Omar)** | `omar@novelhub.com` | `User@123456` |
+| **System Administrator (Admin)** | `admin@novelhub.com` | `Admin@123456` |
+| **Golden Reader** | `reader@novelhub.com` | `User@123456` |
+| **Demo Reader (Sara)** | `sara@novelhub.com` | `User@123456` |
+| **Demo Reader (Omar)** | `omar@novelhub.com` | `User@123456` |
 
 ---
 
-## 📂 هيكل المشروع (Project Structure)
+## 📂 Project Structure
 
 ```
 Novel Reading Platform/
 ├── Areas/
-│   └── Admin/                 # لوحة تحكم الأدمن (Dashboard, AdminNovels, AdminChapters)
-├── Controllers/              # المتحكمات (Home, Novels, Chapters, Checkout, Account)
-├── Data/                     # قاعدة البيانات والتهيئة الأوّلية (ApplicationDbContext, DbInitializer)
-├── Models/                   # النماذج الكيانات ونماذج العرض (Novel, Chapter, Order, ViewModels)
-├── Views/                    # واجهات العرض الخاصة بالقرّاء والمستخدمين
-├── wwwroot/                  # الملفات الثابتة (CSS, JS, Fonts)
-│   ├── css/site.css          # الهوية البصرية والنظام البصري الزمرّدي
-│   └── js/site.js            # سكربت حماية ومعالجة تعويض الصور (Fallback)
-├── Program.cs                # إعدادات التطبيق وحقن الخدمات
-└── NovelPlatform.csproj      # ملف تكوين مشروع C#
+│   └── Admin/                 # Admin Panel (Dashboard, AdminNovels, AdminChapters)
+├── Controllers/              # MVC Controllers (Home, Novels, Chapters, Checkout, Account)
+├── Data/                     # EF Core Context & Seeding (ApplicationDbContext, DbInitializer)
+├── Models/                   # Domain Models & ViewModels (Novel, Chapter, Order, Purchase)
+├── Views/                    # Reader & User Facing Razor Views
+├── wwwroot/                  # Static Web Assets (CSS, JS, Favicons)
+│   ├── css/site.css          # Emerald Slate UI System Styles
+│   └── js/site.js            # Image Fallback & SVG Book Cover Generator Script
+├── Program.cs                # Application Entry Point & Dependency Injection Configuration
+└── NovelPlatform.csproj      # C# Project File
 ```
 
 ---
 
-## 📜 الترخيص والدعم (License & Rights)
+## 📜 License & Rights
 
-جميع الحقوق محفوظة &copy; 2026 - **منصة كِتَاب | Novel Reading Platform**
+All rights reserved &copy; 2026 - **Novel Reading Platform (كِتَاب)**
