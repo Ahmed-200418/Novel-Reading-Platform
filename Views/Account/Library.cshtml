@@ -7,7 +7,7 @@
     decimal totalSpent = Model.Sum(p => p.PricePaid);
 }
 
-<div class="py-4 bg-dark text-white" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);">
+<div class="py-4 text-white" style="background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);">
     <div class="container py-3">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div class="d-flex align-items-center gap-3">
@@ -64,14 +64,18 @@
             }
             else
             {
-                <div class="row g-4">
+                <div class="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center">
                     @foreach (var p in Model)
                     {
-                        <div class="col-12 col-md-6 col-lg-4">
+                        <div class="col">
                             <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden hover-shadow transition">
                                 <div class="card-body p-4 d-flex flex-column">
                                     <div class="d-flex align-items-center gap-3 mb-3">
-                                        <img src="@p.Chapter.Novel.CoverImageUrl" style="width: 50px; height: 70px; object-fit: cover;" class="rounded-3 shadow-sm" alt="Cover">
+                                        <img src="@p.Chapter.Novel.CoverImageUrl" 
+                                             style="width: 50px; height: 70px; object-fit: cover;" 
+                                             class="rounded-3 shadow-sm" 
+                                             alt="Cover"
+                                             onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'">
                                         <div>
                                             <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill mb-1">@p.Chapter.Novel.Title</span>
                                             <h6 class="fw-bold text-dark mb-0">@p.Chapter.Title</h6>

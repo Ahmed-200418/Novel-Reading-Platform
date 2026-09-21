@@ -12,15 +12,15 @@
     if (isAdmin)
     {
         <li class="nav-item">
-            <a class="btn btn-outline-warning btn-sm rounded-pill px-3 fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
-                <i class="fas fa-chart-line ms-1"></i>لوحة التحكم (أدمن)
+            <a class="btn btn-outline-warning btn-sm rounded-pill px-3 fw-bold d-inline-flex align-items-center gap-2" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                <i class="fas fa-chart-line"></i><span>لوحة التحكم (أدمن)</span>
             </a>
         </li>
     }
 
     <li class="nav-item">
-        <a class="btn btn-info btn-sm rounded-pill px-3 fw-bold text-white shadow-sm" asp-controller="Account" asp-action="Library">
-            <i class="fas fa-bookmark ms-1"></i>مكتبتي الفصول
+        <a class="btn btn-info btn-sm rounded-pill px-3 fw-bold text-white shadow-sm d-inline-flex align-items-center gap-2" asp-controller="Account" asp-action="Library">
+            <i class="fas fa-bookmark"></i><span>مكتبتي الفصول</span>
         </a>
     </li>
 
@@ -36,15 +36,25 @@
                 <div class="fw-bold small text-dark">@(currentUser?.FullName)</div>
                 <div class="text-muted text-truncate small" style="max-width: 180px;">@(currentUser?.Email)</div>
             </li>
-            <li><a class="dropdown-item py-2" asp-controller="Account" asp-action="Library"><i class="fas fa-book-open ms-2 text-primary"></i>فصولي المشتراة</a></li>
+            <li>
+                <a class="dropdown-item py-2 d-flex align-items-center gap-2" asp-controller="Account" asp-action="Library">
+                    <i class="fas fa-book-open text-primary"></i><span>فصولي المشتراة</span>
+                </a>
+            </li>
             @if (isAdmin)
             {
-                <li><a class="dropdown-item py-2 text-warning fw-bold" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-sliders ms-2"></i>إدارة الروايات والنظام</a></li>
+                <li>
+                    <a class="dropdown-item py-2 text-warning fw-bold d-flex align-items-center gap-2" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                        <i class="fas fa-sliders"></i><span>إدارة الروايات والنظام</span>
+                    </a>
+                </li>
             }
             <li><hr class="dropdown-divider"></li>
             <li>
                 <form class="form-inline" asp-controller="Account" asp-action="Logout" method="post">
-                    <button type="submit" class="dropdown-item text-danger py-2"><i class="fas fa-right-from-bracket ms-2"></i>تسجيل الخروج</button>
+                    <button type="submit" class="dropdown-item text-danger py-2 d-flex align-items-center gap-2">
+                        <i class="fas fa-right-from-bracket"></i><span>تسجيل الخروج</span>
+                    </button>
                 </form>
             </li>
         </ul>
@@ -53,13 +63,13 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link fw-semibold" asp-controller="Account" asp-action="Login">
-            <i class="fas fa-right-to-bracket ms-1"></i>دخول
+        <a class="nav-link fw-semibold d-inline-flex align-items-center gap-2" asp-controller="Account" asp-action="Login">
+            <i class="fas fa-right-to-bracket"></i><span>دخول</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="btn btn-primary btn-sm rounded-pill px-4 fw-bold shadow-sm" asp-controller="Account" asp-action="Register">
-            حساب جديد
+        <a class="btn btn-primary btn-sm rounded-pill px-4 fw-bold shadow-sm d-inline-flex align-items-center gap-2" asp-controller="Account" asp-action="Register">
+            <i class="fas fa-user-plus"></i><span>حساب جديد</span>
         </a>
     </li>
 }
